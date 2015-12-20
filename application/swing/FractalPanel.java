@@ -24,22 +24,23 @@ public class FractalPanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if (drawer != null) {
-			drawer.draw((Graphics2D) g);
-		}
-//		g.setColor(Color.CYAN);
-//		g.drawLine(0, this.getHeight() / 2, this.getWidth(), this.getHeight() / 2 );
-//		g.drawLine(this.getWidth() / 2, 0, this.getWidth() / 2, this.getHeight());
+		drawer.draw((Graphics2D) g);
+
+		// g.setColor(Color.CYAN);
+		// g.drawLine(0, this.getHeight() / 2, this.getWidth(), this.getHeight()
+		// / 2 );
+		// g.drawLine(this.getWidth() / 2, 0, this.getWidth() / 2,
+		// this.getHeight());
 	}
 
 	public void setColorScheme(ColorScheme scheme) {
 		this.scheme = scheme;
 	}
-	
+
 	public void setFractal(Fractal f) {
 		drawer.setFractal(f);
 	}
-	
+
 	public ColorScheme getColorScheme() {
 		return scheme;
 	}
@@ -47,11 +48,15 @@ public class FractalPanel extends JPanel {
 	public FractalCalculator getFractalCalculator() {
 		return drawer.getFractalCalculator();
 	}
+	
+	public FractalDrawer getDrawer() {
+		return drawer;
+	}
 
 	public RectangleDrawer getRectangleDrawer() {
 		return drawer.getRectangleDrawer();
 	}
-	
+
 	FractalPanel() {
 		this.addComponentListener(new ComponentListener() {
 
@@ -67,8 +72,7 @@ public class FractalPanel extends JPanel {
 			public void componentMoved(ComponentEvent e) {}
 
 			@Override
-			public void componentShown(ComponentEvent e) {
-			}
+			public void componentShown(ComponentEvent e) {}
 
 			@Override
 			public void componentHidden(ComponentEvent e) {}

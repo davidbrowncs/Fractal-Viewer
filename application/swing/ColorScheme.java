@@ -21,7 +21,7 @@ public class ColorScheme implements Cloneable {
 	}
 
 	private double convert(double fraction) {
-		return (1 - fraction);
+		return (fraction);
 	}
 
 	private int colourNum(double fraction, int comp) {

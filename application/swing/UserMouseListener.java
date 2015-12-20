@@ -42,7 +42,7 @@ public class UserMouseListener implements MouseListener, MouseMotionListener{
 	}
 	
 	@Override
-	public synchronized void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) {
 		this.x = e.getX();
 		this.y = e.getY();
 		for (FractalPanel p : repaintPanels) {

@@ -3,6 +3,7 @@ package swing;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -24,22 +25,31 @@ public class FractalDrawer implements SizeListener {
 			fractalCalculator.update();
 		}
 		if (width != 0 && height != 0) {
-			BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			int[] buf = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
+			BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+			int[] buf = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 			int[] data = fractalCalculator.getIterationsArray();
 			System.arraycopy(data, 0, buf, 0, data.length);
-			g.drawImage(img, 0, 0, null);
+			g.drawImage(image, 0, 0, null);
 		}
 		if (drawer != null && drawer.rectangleCreated()) {
 			g.setColor(Color.WHITE);
 			g.draw(drawer.getRect());
 		}
 	}
-	
+
 	public void setFractal(Fractal f) {
 		fractalCalculator.setFractal(f);
 	}
-	
+
+	public BufferedImage getImage(FractalCalculator c, int width, int height, double xMin, double xMax, double yMin,
+			double yMax) {
+		int[] data = FractalCalculator.getColourArray(width, height, c, xMin, xMax, yMin, yMax);
+		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		int[] buf = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
+		System.arraycopy(data, 0, buf, 0, data.length);
+		return img;
+	}
+
 	public RectangleDrawer getRectangleDrawer() {
 		return drawer;
 	}
@@ -57,7 +67,7 @@ public class FractalDrawer implements SizeListener {
 	}
 
 	@Override
-	public synchronized void setSize(Dimension d) {
+	public void setSize(Dimension d) {
 		this.width = (int) d.getWidth();
 		this.height = (int) d.getHeight();
 	}

@@ -20,7 +20,6 @@ public final class FractalPanelGenerator {
 		panel.setDrawer(drawer);
 		panel.addSizeListener(fractalCalculator);
 		panel.addSizeListener(drawer);
-		panel.addSizeListener(rectDrawer.getDrawingRectangle());
 		return panel;
 	}
 }

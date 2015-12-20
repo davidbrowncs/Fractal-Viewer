@@ -19,7 +19,15 @@ public class RangeHistory {
 		return ranges.pop();
 	}
 
-	public static class Range {
+	public RangeHistory clone() {
+		RangeHistory h = new RangeHistory();
+		for (int i = 0; i < ranges.size(); i++) {
+			h.ranges.add(ranges.get(i).clone());
+		}
+		return h;
+	}
+
+	public static class Range implements Cloneable {
 		private double xMin;
 		private double yMin;
 		private double xMax;
@@ -32,32 +40,24 @@ public class RangeHistory {
 			this.yMax = yMax;
 		}
 
-		/**
-		 * @return the xMin
-		 */
 		public double getxMin() {
 			return xMin;
 		}
 
-		/**
-		 * @return the yMin
-		 */
 		public double getyMin() {
 			return yMin;
 		}
 
-		/**
-		 * @return the xMax
-		 */
 		public double getxMax() {
 			return xMax;
 		}
 
-		/**
-		 * @return the yMax
-		 */
 		public double getyMax() {
 			return yMax;
+		}
+
+		public Range clone() {
+			return new Range(xMin, xMax, yMin, yMax);
 		}
 	}
 }
